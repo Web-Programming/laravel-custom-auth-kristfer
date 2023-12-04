@@ -23,12 +23,18 @@ class ProdiController extends Controller
         // dump($request).;
         // echo $request -> nama;
 
+        $this->authorize('create', Prodi::class);
+
         $validateData = $request->validate([
-            
             'nama'=> 'required|min:5|max:20',
+            'foto'=> 'required|file|image|max:5000',
         ]);
+        // ambil ekstensi file
+        $ext = $request ->foto->getClientOriginalExtension();
         // dump($validateData);
         // echo $validateData['nama'];
+        $nama_file = 'foto-'.time() . '.'.$ext;
+        $path = $request->foto->storeAs('public', $nama_file);
 
         $prodi = new Prodi();
         $prodi->nama = $validateData['nama'];
@@ -78,7 +84,10 @@ public function update(Request $request, Prodi $prodi) {
 }
 
 public function destroy(Prodi $prodi) {
+    $this-> authorize('delete', $prodi);
+
     $prodi->delete();
     return redirect()->route('prodi.index')->with('info','Prodi' .$prodi->nama.' berhasil dihapus.');
 }
 }
+
