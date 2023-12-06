@@ -22,18 +22,21 @@ class ProdiPolicy
     public function view(User $user, Prodi $prodi): bool
     {
         //
+        return in_array($user->email, [
+            'rachmat.nur@gmail.com'
+        ]);
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
+        //
         return in_array($user->email, [
             'rachmat.nur@gmail.com',
             'ahmad@gmail.com'
         ]);
-        //
     }
 
     /**
@@ -47,7 +50,7 @@ class ProdiPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Prodi $prodi)
+    public function delete(User $user, Prodi $prodi): bool
     {
         //
         return in_array($user->email, [

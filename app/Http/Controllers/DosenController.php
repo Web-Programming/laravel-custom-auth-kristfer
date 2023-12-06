@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class KurikulumController extends Controller
+class DosenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,17 +13,11 @@ class KurikulumController extends Controller
      */
     public function index()
     {
-        echo "Ini halaman Index Kurikulum";
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        echo "Ini halaman Create Kurikulum";
+        $data = [
+            ['id' => 1, 'nama ' => 'Nur Rachmat'],
+            ['id' => 2, 'nama ' => 'Yohannes']
+        ];
+        return $data;
     }
 
     /**
@@ -34,7 +28,7 @@ class KurikulumController extends Controller
      */
     public function store(Request $request)
     {
-        echo "Ini halaman store Kurikulum dengan request " . $request;
+        //
     }
 
     /**
@@ -45,18 +39,7 @@ class KurikulumController extends Controller
      */
     public function show($id)
     {
-        echo "Ini halaman show Kurikulum dengan id " . $id;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        echo "Ini halaman edit Kurikulum dengan id " . $id;
+        //
     }
 
     /**
@@ -68,7 +51,7 @@ class KurikulumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo "Ini halaman update Kurikulum dengan request dan id " . $request . " , " . $id;
+        //
     }
 
     /**
@@ -79,6 +62,6 @@ class KurikulumController extends Controller
      */
     public function destroy($id)
     {
-        echo "Ini halaman destroy Kurikulum dengan id " . $id;
+        //
     }
 }

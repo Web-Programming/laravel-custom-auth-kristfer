@@ -8,98 +8,84 @@ use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function insert()
+    {
+        $result = DB::insert('INSERT INTO mahasiswas (npm, nama_mahasiswa, tempat_lahir, tanggal_lahir, alamat, created_at) values (?, ?, ?, ?, ?, ?)', ['1922110006', 'Ahmad', 'Palembang', '2000-01-01', 'Jl Rajawali', now()]);
+        dump($result);
+    }
+
+    public function update()
+    {
+        $result = DB::update('update mahasiswas set nama_mahasiswa = "Ali", updated_at = now() where npm = ?', ['1922110006']);
+        dump($result);
+    }
+
+    public function delete()
+    {
+        $result = DB::delete('delete from mahasiswas where npm = ?', ['1922110006']);
+        dump($result);
+    }
+
+    public function select()
+    {
+        $kampus = "Universitas Multi Data Palembang";
+        $result = DB::select('select * from mahasiswas');
+        // dump($result);
+        return view('mahasiswa.index', ['allmahasiswa' => $result, 'kampus' => $kampus]);
+    }
+
     public function insertElq()
     {
-        //Single Assigment
         // $mhs = new Mahasiswa();
-        // $mhs -> nama = "KristFer";
-        // $mhs -> npm = '2226250070';
-        // $mhs -> tempat_lahir = 'Batavia';
-        // $mhs -> tanggal_lahir = date('Y-m-d'); //tgl hari ini
-        // $mhs -> save();
+        // $mhs->nama = "Nur Rachmat";
+        // $mhs->npm = "2009250066";
+        // $mhs->tempat_lahir = "London";
+        // $mhs->tanggal_lahir = date("Y-m-d");
+        // $mhs->save();
         // dump($mhs);
 
-
-        //Mass Assigment
+        // Mass Asignment
         $mhs = Mahasiswa::insert(
+            // [
+            //     'nama' => 'Rachmat Nur',
+            //     'npm' => '2009250033',
+            //     'tempat_lahir' => 'Jakarta',
+            //     'tanggal_lahir' => date("Y-m-d")
+            // ],
             [
-                ['nama' => 'KristFer',
-                'npm' => '2226250070',
-                'tempat_lahir' => 'Batavia',
-                'tanggal_lahir' => date('Y-m-d')],
-                ['nama' => 'KristFer KrucukKrucuk',
-                'npm' => '2226250070',
-                'tempat_lahir' => 'Rengasdengklok',
-                'tanggal_lahir' => date('Y-m-d')],
-                 ['nama' => 'KristFer GukGuk',
-                'npm' => '2226250070',
-                'tempat_lahir' => 'Konoha',
-                'tanggal_lahir' => date('Y-m-d')],
-            ]
+                'nama' => 'Will',
+                'npm' => '2009250099',
+                'tempat_lahir' => 'Bandung',
+                'tanggal_lahir' => date("Y-m-d"),
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
         );
-
-        // $result = DB::insert('insert into mahasiswa
-        // (npm, nama_mahasiswa, tempat_lahir, tanggal_lahir, alamat, created_at)
-        // values (?, ?, ?, ?, ?, ?)', ['2226250070', 'KritFer', 'Palembang', '2005-02-20',
-        // 'Kenten Laut', now()]);
-        // dump($result);
-        //
+        dump($mhs);
     }
-
-    public function allJoinElq() {
-        $kampus = "Universitas Multi Data Palembang";
-        $mahasiswa = Mahasiswa::has('prodi')-> get();
-        return view('mahasiswa.index', ['allmahasiswa' => $mahasiswa,'kampus'=> $kampus]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function updateElq()
     {
-
+        $mahasiswa = Mahasiswa::where('npm', '2009250044')->first();
+        $mahasiswa->nama_mahasiswa = 'Ucok';
+        $mahasiswa->save();
+        dump($mahasiswa);
+    }
+    public function deleteElq()
+    {
+        $mahasiswa = Mahasiswa::where('npm', '2009250033')->first();
+        $mahasiswa->delete();
+        dump($mahasiswa);
+    }
+    public function selectElq()
+    {
+        $kampus = "Univetsitas Multi Data Palembang";
+        $mahasiswa = Mahasiswa::all();
+        return view('mahasiswa.index', ['allmahasiswa' => $mahasiswa, 'kampus' => $kampus]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function allJoinElq(){
+        $kampus = "Universitas Multi Data Palembang";
+        $mahasiswas = Mahasiswa::has('prodi')->get();
+        return view('mahasiswa.index', ['allmahasiswa' => $mahasiswas, 'kampus' => $kampus]);
     }
 }

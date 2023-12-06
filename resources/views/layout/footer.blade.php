@@ -1,6 +1,4 @@
-<html>
-    <body>
-    <hr>
-        &copy; {{ date('Y') }} Universitas Multi Palembang
-    </body>
+  <hr>
+  &copy; {{date ('Y')}} Universitas Multi Data Palembang
+</body>
 </html>

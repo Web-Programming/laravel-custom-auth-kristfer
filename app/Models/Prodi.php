@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Prodi extends Model
 {
     use HasFactory;
-    protected $table = 'prodi';
+    protected $table = "prodis";
+    protected $fillable = ['nama', 'foto'];
+    protected $guarded = ['', ''];
+    public function mahasiswas()
+    {
+        return $this->hasMany('App\Models\Mahasiswa');
+    }
 }

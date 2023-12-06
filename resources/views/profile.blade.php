@@ -7,5 +7,6 @@
   <title>Document</title>
 </head>
 <body>
-    <h1>{{$kampus}}</h1>
-    <hr>
+  <h1>||--KF--||</h1>
+</body>
+</html>

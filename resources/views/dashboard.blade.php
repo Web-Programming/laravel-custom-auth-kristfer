@@ -53,8 +53,7 @@
 
             <div class="sb-sidenav-footer">
                 <div class="small"></div>
-                Start Bootstrap
-                Kristian Fernando
+                <h3>Welcome {{Auth::user()->username}}</h3>
             </div>
         </nav>
     </div>
